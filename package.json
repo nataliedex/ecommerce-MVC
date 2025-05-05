@@ -1,0 +1,13 @@
+{
+  "name": "ecommerce-mvc",
+  "version": "1.0.0",
+  "description": "This is a practice E-commererce application using JavaScript and Node and an MVC model",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

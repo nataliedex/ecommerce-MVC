@@ -1,11 +1,11 @@
 This is a practice E-commererce application using JavaScript and Node and an MVC model
 
-[]  Set up the github repo
-[]  Set up the MVC folder structure
-[]  Set up a passport login/password service
-[]  Set up cloudinary for product images
-[]  Set up MongoDB for the product database
+[x]  Set up the github repo
+[x]  Set up the MVC folder structure
+[x]  Set up a passport login/password service
+[x]  Set up cloudinary for product images
+[x]  Set up MongoDB for the product database
 []  Think about what databases we will need
-[]  .gitignore file
+[x]  .gitignore file
 []  server.js file
 []   npm init
