@@ -7,5 +7,9 @@ This is a practice E-commererce application using JavaScript and Node and an MVC
 [x]  Set up MongoDB for the product database
 []  Think about what databases we will need
 [x]  .gitignore file
-[]  server.js file
-[]   npm init
+[x]  server.js file
+[x]   npm init
+[]  set up header and footer
+[]  login and setup
+[]  add products on the company side
+[]  would be really cool to do my own CSS???
