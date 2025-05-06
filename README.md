@@ -12,4 +12,4 @@ This is a practice E-commererce application using JavaScript and Node and an MVC
 []  set up header and footer
 []  login and setup
 []  add products on the company side
-[]  would be really cool to do my own CSS???
+[x]  would be really cool to do my own CSS??? -- nah, just going to use BootStrap
