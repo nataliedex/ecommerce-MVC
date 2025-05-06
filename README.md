@@ -10,6 +10,9 @@ This is a practice E-commererce application using JavaScript and Node and an MVC
 [x]  server.js file
 [x]   npm init
 []  set up header and footer
-[]  login and setup
+[]  make a login for business
+[]  make a login for customer
+[]  make a sign up for business
+[]  make a sign up for customer
 []  add products on the company side
 [x]  would be really cool to do my own CSS??? -- nah, just going to use BootStrap
