@@ -1,30 +1,39 @@
 // config/passport.js
 const LocalStrategy = require("passport-local").Strategy;
-const User = require("../models/User");
+const Customer = require("../models/Customer");
+const Business = require("../models/Business");
 
 module.exports = function (passport) {
   passport.use(
     new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
       try {
-        const user = await User.findOne({ email: email.toLowerCase() });
+        let user = await Customer.findOne({ email: email.toLowerCase() });
+       
+        if(!user){
+          user = await Business.findOne({ email: email.toLowerCase() });
+        }
 
         if (!user) {
-          return done(null, false, { message: `Email ${email} not found.` });
+          return done(null, false, { msg: `Email ${email} not found.` });
         }
 
         if (!user.password) {
           return done(null, false, {
-            message:
-              "This account uses a sign-in provider. Please set a password in your profile.",
+            msg:
+              "Your account was registered using a sign-in provider. To enable password login, sign in using a provider, and then set a password under your user profile.",
           });
         }
 
-        const isMatch = await user.comparePassword(password);
-
-        if (isMatch) {
-          return done(null, user);
-        } else {
-          return done(null, false, { message: "Invalid email or password." });
+        try {
+          const isMatch = await user.comparePassword(password);
+          
+          if (isMatch) {
+            return done(null, user);
+          }
+          
+          return done(null, false, { msg: "Invalid email or password." });
+        } catch (err) {
+          return done(err);
         }
       } catch (err) {
         return done(err);
@@ -32,13 +41,22 @@ module.exports = function (passport) {
     })
   );
 
-  passport.serializeUser((user, done) => done(null, user.id));
+  passport.serializeUser((user, done) => {
+    const type = user.schema?.path("business") ? "business" : "customer" ;
+    console.log("type is: ", type);
+    done(null, { id: user.id, type});
+  });
 
-  passport.deserializeUser(async (id, done) => {
+
+  passport.deserializeUser(async (obj, done) => {
     try {
-      const user = await User.findById(id);
+      const user =
+        obj.type === "user"
+          ? await Customer.findById(obj.id)
+          : await Business.findById(obj.id);
+
       if (!user) {
-        return done(new Error("User not found"));
+        return done(new Error(`No user found with ID ${obj.id} in ${obj.type}`));
       }
       done(null, user);
     } catch (err) {
