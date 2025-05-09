@@ -1,7 +1,4 @@
 <%- include('partials/headerloggedin') -%>
-
-<%= user.id %>
-
     <main> 
         <section id="add-items">
             <div class="container">
@@ -10,23 +7,23 @@
                     <form class="row g-3" action="/createProduct" method="POST">
                         <div class="col-12">
                           <label for="product" class="form-label">Product Name</label>
-                          <input type="product" class="form-control" id="product" name="product">
+                          <input type="text" class="form-control" id="product" name="product">
                         </div>
                         <div class="col-12">
                           <label for="description" class="form-label">Product Description</label>
-                          <textarea type="description" class="form-control" rows="3" name="description" id="description"></textarea>
+                          <textarea class="form-control" rows="3" name="description" id="description"></textarea>
                         </div>
                         <div class="col-12">
                             <label for="image" class="form-label">Product Image</label>
-                            <input type="image" class="form-control" id="image" name="image">
+                            <input type="text" class="form-control" id="image" name="image">
                           </div>
                         <div class="col-md-6">
                             <label for="quantity" class="form-label">Quantity</label>
-                            <input type="quantity" class="form-control" id="quantity" name="quantity">
+                            <input type="number" class="form-control" id="quantity" name="quantity">
                         </div>
                         <div class="col-md-6">
                             <label for="price" class="form-label">Price</label>
-                            <input type="price" class="form-control" placeholder="$0.00" id="price" name="price">
+                            <input type="number" step="0.01" class="form-control" placeholder="$0.00" id="price" name="price">
                         </div>
                         <div class="col-12">
                           <button type="submit" value="Upload" class="btn btn-primary">Add Product</button>
@@ -37,7 +34,23 @@
         </section>
 
         <section id="gallery">
-            gallery of all products, ability to edit and delete
+            <div class="row w-100 my-md-3 ps-md-3">
+                <% for(let i = 0; i < product.length; i++){ %>
+                    <div class="col-md-4 mb-3">
+                        <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
+                            <div class="my-3 p-3"> 
+                                <h4 class="display-5"><%= product[i].product %></h4> 
+                                <p class="lead"><%= product[i].description %></p> 
+                                <p class="lead">Price: $<%= product[i].price %></p>
+                            </div> 
+                            <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; overflow: hidden;">
+                                <img src="<%= product[i].image %>" alt="<%= product[i].product %>" style="width: 100%; height: 100%; object-fit: cover;">
+                              </div>
+                        </div>
+                    </div>
+                    
+                <% } %>
+            </div>
         </section>
         
 

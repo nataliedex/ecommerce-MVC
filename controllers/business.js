@@ -6,9 +6,8 @@ module.exports = {
 
     getProduct: async(req, res) => {
         try{
-            console.log("going to product page");
-            res.render("product.ejs", { user: req.user });
-
+            const product = await Product.find({  company: req.user.id });
+            res.render("product.ejs", { user: req.user, product: product });
         } catch(err){
             console.log(err);
             res.status(500).send("Server Error");
