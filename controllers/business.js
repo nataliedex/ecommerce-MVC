@@ -1,12 +1,39 @@
+const Product = require("../models/Product");
+const Business = require("../models/Business");
+
 module.exports = {
-    getBusiness: async(req, res) => {
+
+
+    getProduct: async(req, res) => {
         try{
-            console.log("going to business page");
-            res.render("forbusiness.ejs");
+            console.log("going to product page");
+            res.render("product.ejs", { user: req.user });
 
         } catch(err){
             console.log(err);
             res.status(500).send("Server Error");
+        }
+    },
+
+    createProduct: async(req, res) => {
+
+        console.log(req.body);
+        try{
+            await Product.create({
+                company: req.user.id,
+                product: req.body.product,
+                description: req.body.description,
+                price: req.body.price,
+                quantity: req.body.quantity,
+                image: req.body.image,
+            });
+            // res.status(201).json(newProduct);
+            console.log("Product has been added");
+            res.redirect("/product");
+
+        }catch(err){
+            console.log(err);
+            res.send(500).send("error creating a product");
         }
     },
 };

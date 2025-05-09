@@ -7,14 +7,7 @@ const Business = require("../models/Business");
 module.exports = {
     getLogin : (req, res) => {
         if(req.user) {
-            console.log(req.user.userType);
-          if(req.user.userType === "customer"){
-            return res.redirect("/forcustomer");
-          } else if(req.user.userType === "business") {
-            return res.redirect("/forbusiness");
-          } else {
-            return res.redirect("/login");
-          }
+          return res.redirect("/product");
         }
         res.render("login.ejs", { user: req.user || null });
       },
@@ -55,7 +48,7 @@ module.exports = {
             console.log("Logged-in user:", req.user);
             console.log("Session details:", req.session);
       
-            const redirectPath = req.user.userType === "business" ? "/forbusiness" : "/forcustomer";
+            const redirectPath = "/product";
             const finalRedirect = req.session.returnTo || redirectPath;
       
             req.session.returnTo = null;
@@ -85,6 +78,73 @@ module.exports = {
             res.redirect("/");
         }
         });
+    },
+
+    getSignUp: async(req, res) => {
+      try {
+        if(req.user){
+          const redirectPath = "/product";
+          return res.redirect(redirectPath);
+        }
+        res.render("signup.ejs");
+
+      } catch(err){
+        console.log(err);
+        return res.status(500).send("An error occurred during getSignUp")
+      }
+
+    },
+
+    postSignUp: async(req, res, next) => {
+      const validationErrors = validateSignupInputs(req.body);
+    
+        if(validationErrors.length){
+        req.flash("errors", validationErrors);
+        return res.redirect("../signup");
+        }
+        req.body.email = validator.normalizeEmail(req.body.email, {
+        gmail_remove_dots: false,
+        });
+    
+        const userData =  {
+        userType: "business",
+        companyName: req.body.companyName,
+        email: req.body.email,
+        password: req.body.password,
+        };
+    
+        const Model = Business;
+        const redirectPath = "/product";
+        console.log("Model:", Model);
+        console.log("redirectPath: ", redirectPath);
+    
+        try {
+            const existingUser = await Model.findOne({ email: req.body.email });
+            
+            if (existingUser) {
+            req.flash("errors", {
+                msg: "Account with that email address already exists.",
+            });
+            return res.redirect("../signup");
+            }
+            const newUser = new Model(userData);
+            await newUser.save();
+            
+            return new Promise((resolve, reject) => {
+            req.logIn(newUser, (err) => {
+                if (err) {
+                console.log("login error:", err);
+                return reject(err);
+                }
+                res.redirect(redirectPath) ;
+                resolve();
+            });
+            });
+        } catch (err) {
+            console.error("signup error:", err);
+            return next(err);
+        }
+
     },
   
     getSignUpBusiness: async(req, res) => {
