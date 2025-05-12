@@ -10,6 +10,7 @@ const logger = require("morgan");
 const validator = require("validator");
 const connectDB = require("./config/database");
 const mainRoutes =require("./routes/main");
+const productRoutes =require("./routes/product");
 const debug = require("debug")("app:session");
 
 // use .env file in config folder
@@ -63,6 +64,7 @@ app.use(flash());
 
 // Setup Routes for which the server is listening
 app.use("/", mainRoutes);
+app.use("/product", productRoutes);
 
 
 // Server Running

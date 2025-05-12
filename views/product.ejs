@@ -38,7 +38,7 @@
                 <% for(let i = 0; i < product.length; i++){ %>
                     
                         <div class="col-md-4 mb-3">
-                            <a href="/">
+                            <a href="/product/<%= product[i]._id%>">
                                 <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
                                     <div class="my-3 p-3"> 
                                         <h4 class="display-5 text-wrap fs-4 fw-bold"><%= product[i].product %></h4> 
