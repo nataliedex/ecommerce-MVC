@@ -13,6 +13,10 @@ This is a practice E-commererce application using JavaScript and Node and an MVC
 []  make a login for business
 []  make a login for customer
 [x]  make a sign up for business
-[x]  make a sign up for customer
-[]  add products on the company side
+[]  make a sign up for customer
+[x]  add products on the company side
 [x]  would be really cool to do my own CSS??? -- nah, just going to use BootStrap
+[x]  modify products on company side
+[x]  delete products on company side
+[] update add product to be a modal
+

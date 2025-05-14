@@ -15,8 +15,6 @@ module.exports = {
     },
 
     createProduct: async(req, res) => {
-
-        console.log(req.body);
         try{
             await Product.create({
                 company: req.user.id,
