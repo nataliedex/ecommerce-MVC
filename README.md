@@ -18,5 +18,5 @@ This is a practice E-commererce application using JavaScript and Node and an MVC
 [x]  would be really cool to do my own CSS??? -- nah, just going to use BootStrap
 [x]  modify products on company side
 [x]  delete products on company side
-[] update add product to be a modal
+[x] update add product to be a modal
 
