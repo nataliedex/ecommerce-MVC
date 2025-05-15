@@ -1,4 +1,9 @@
-<%- include('partials/headerloggedin') -%>
+<% if(currentUser && currentUser._id.toString() === product.company.toString()){ %>
+    <%- include('partials/headerloggedin') -%>
+<% } else { %>
+    <%- include('partials/header') -%>
+<% } %>
+
     <main> 
 
     <div class="mx-auto" style="width: 80%;"> 

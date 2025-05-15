@@ -6,10 +6,16 @@ module.exports = {
     getItem: async(req, res) => {
         try{
             const product = await Product.findById(req.params.id);
-            const user = await Business.findOne({  user: product.user });
+
+            let user = null;
+            if(req.user){
+                user = await Business.findById(req.user._id);
+            }
+
 
             res.render("item.ejs", {
                 product,
+                currentUser: req.user || null,
                 user,
             });
         } catch(err){

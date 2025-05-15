@@ -19,4 +19,6 @@ This is a practice E-commererce application using JavaScript and Node and an MVC
 [x]  modify products on company side
 [x]  delete products on company side
 [x] update add product to be a modal
+[x]  set up model for table
+[]  
 

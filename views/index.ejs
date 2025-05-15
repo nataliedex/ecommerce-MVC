@@ -17,73 +17,25 @@
         <!-- list of products we will have this as a random products highlighted on the page from sellers -->
 
         <div class="row w-100 my-md-3 ps-md-3">
-            <div class="col-md-4 mb-3">
-                <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
-                    <div class="my-3 p-3"> 
-                        <h2 class="display-5">Product 1</h2> 
-                        <p class="lead">Product 1 Description</p> 
-                    </div> 
-                    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; overflow: hidden;">
-                        <img src="imgs/unsplash1.jpg" alt="unsplash image of romper" style="width: 100%; height: 100%; object-fit: cover;">
-                      </div>
+            <!-- This is where a for statment will populdate 3 random items for the homepage -->
+            <% for(let i = 0; i < product.length; i++){ %>
+                <div class="col-md-4 mb-3">
+                    <a href="/product/<%= product[i]._id%>">
+                        <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
+                            <div class="my-3 p-3"> 
+                                <h4 class="display-5 text-wrap fs-4 fw-bold"><%= product[i].product %></h4> 
+                            </div> 
+                            <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; overflow: hidden;">
+                                <img src="<%= product[i].image %>" alt="<%= product[i].product %>" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="my-3 p-3"> 
+                                <p class="lead fs-6">Price: $<%= product[i].price %></p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
-                    <div class="my-3 p-3"> 
-                        <h2 class="display-5">Product 2</h2> 
-                        <p class="lead">Product 2 Description</p> 
-                    </div> 
-                    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; overflow: hidden;">
-                        <img src="imgs/unsplash2.jpg" alt="unsplash image of couch" style="width: 100%; height: 100%; object-fit: cover;">
-                      </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-3">
-                <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
-                    <div class="my-3 p-3"> 
-                        <h2 class="display-5">Product 3</h2> 
-                        <p class="lead">Product 3 Description</p> 
-                    </div> 
-                    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; overflow: hidden;">
-                        <img src="imgs/unsplash3.jpg" alt="unsplash image of makeup brushes" style="width: 100%; height: 100%; object-fit: cover;">
-                      </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
-                    <div class="my-3 p-3"> 
-                        <h2 class="display-5">Product 4</h2> 
-                        <p class="lead">Product 4 Description</p> 
-                    </div> 
-                    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; overflow: hidden;">
-                        <img src="imgs/unsplash4.jpg" alt="unsplash image of colored pencils" style="width: 100%; height: 100%; object-fit: cover;">
-                      </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
-                    <div class="my-3 p-3"> 
-                        <h2 class="display-5">Product 5</h2> 
-                        <p class="lead">Product 5 Description</p> 
-                    </div> 
-                    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; overflow: hidden;">
-                        <img src="imgs/unsplash5.jpg" alt="unsplash image of book stack" style="width: 100%; height: 100%; object-fit: cover;">
-                      </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden"> 
-                    <div class="my-3 p-3"> 
-                        <h2 class="display-5">Product 6</h2> 
-                        <p class="lead">Product 6 Description</p> 
-                    </div> 
-                    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; overflow: hidden;">
-                        <img src="imgs/unsplash6.jpg" alt="unsplash image of denim jacket" style="width: 100%; height: 100%; object-fit: cover;">
-                      </div>
-                </div>
-            </div>
+            <% } %>
+ 
         </div> 
 
     </main>
