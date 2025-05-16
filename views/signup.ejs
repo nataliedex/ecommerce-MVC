@@ -12,25 +12,51 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
+                
+
                 <form action="/signup" method="POST">
-                  <div class="mb-3">
-                    <label for="companyName" class="form-label">Company Name</label>
-                    <input type="text" class="form-control" id="companyName" name="companyName">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-                    <div id="emailHelp" class="form-text"></div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                  </div>
-                  <div class="mb-3">
-                      <label for="confirmPassword" class="form-label">Confirm Password</label>
-                      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="mb-3">
+                        <label for="userType" class="form-label">Type of Sign Up</label>
+                        <div>
+                          <input type="radio" id="customer-radio" name="userType" value="customer">
+                          <label for="customer">Customer</label>
+                        </div>
+                        <div>
+                          <input type="radio" id="business-radio" name="userType" value="business">
+                          <label for="business">Business</label>
+                        </div>
+                    </div>
+                      <!-- if statement here for company or first name last name -->
+                    
+                    <!-- Business Input field -->
+                    <div id="business-fields" class="mb-3" style="display: none;">
+                        <label for="companyName" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" id="companyName" name="companyName">
+                    </div>
+
+                    <!-- Customer Input field -->
+                    <div id="customer-fields" class="mb-3" style="display: none;">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </section>
         </div>
