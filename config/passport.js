@@ -42,24 +42,29 @@ module.exports = function (passport) {
   );
 
   passport.serializeUser((user, done) => {
-    const type = user.schema?.path("business") ? "business" : "customer" ;
-    console.log("type is: ", type);
+    const type = user.constructor.modelName.toLowerCase();
+    console.log("type is: ", type, "Serializing user: ", user.id);
     done(null, { id: user.id, type});
   });
 
 
   passport.deserializeUser(async (obj, done) => {
+    console.log("Deserializing user with:", obj);
     try {
-      const user =
-        obj.type === "user"
-          ? await Customer.findById(obj.id)
-          : await Business.findById(obj.id);
-
+      let user;
+      if (obj.type === "customer") {
+        user = await Customer.findById(obj.id);
+      } else if (obj.type === "business") {
+        user = await Business.findById(obj.id);
+      }
+  
       if (!user) {
         return done(new Error(`No user found with ID ${obj.id} in ${obj.type}`));
       }
+  
       done(null, user);
     } catch (err) {
+      console.error("Error during deserialization:", err);
       done(err);
     }
   });

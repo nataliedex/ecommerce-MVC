@@ -27,4 +27,9 @@ body {
   color: white !important;  /* Forces the text to be white */
 }
 
+ul
+{
+    list-style-type: none;
+}
+
 

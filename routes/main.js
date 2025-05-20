@@ -15,6 +15,8 @@ router.post("/signup", authController.postSignUp);
 router.get("/product", businessController.getProduct);
 router.post("/createProduct", businessController.createProduct);
 
+router.get("/shop", businessController.getShop);
+
 
 
 

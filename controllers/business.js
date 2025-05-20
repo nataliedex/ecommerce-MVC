@@ -1,5 +1,6 @@
 const Product = require("../models/Product");
 const Business = require("../models/Business");
+const Customer = require("../models/Customer");
 
 module.exports = {
 
@@ -8,6 +9,25 @@ module.exports = {
         try{
             const product = await Product.find({  company: req.user.id });
             res.render("product.ejs", { user: req.user, product: product });
+        } catch(err){
+            console.log(err);
+            res.status(500).send("Server Error");
+        }
+    },
+
+    getShop: async(req, res) => {
+        try{
+        
+            const product = await Product.find().populate("company", "companyName");
+            const companyNames = [
+                ...new Set(product.map(p => p.company?.companyName).filter(Boolean))
+            ];
+            res.render("shop.ejs", { 
+                user: req.user, 
+                product: product,
+                companyNames: companyNames,
+             });
+
         } catch(err){
             console.log(err);
             res.status(500).send("Server Error");

@@ -6,6 +6,7 @@ const Business = require("../models/Business");
 
 module.exports = {
     getLogin : (req, res) => {
+      console.log(req.user);
         if(req.user) {
           return res.redirect("/product");
         }
@@ -13,6 +14,7 @@ module.exports = {
       },
 
       postLogin : (req, res, next) => {
+        console.log(req.user);
         const validationErrors = [];
         if (!validator.isEmail(req.body.email))
           validationErrors.push({ msg: "Please enter a valid email address." });
@@ -48,7 +50,7 @@ module.exports = {
             console.log("Logged-in user:", req.user);
             console.log("Session details:", req.session);
       
-            const redirectPath = "/product";
+            const redirectPath = (req.user.type === "business" ? "/product" : "/shop");
             const finalRedirect = req.session.returnTo || redirectPath;
       
             req.session.returnTo = null;
@@ -59,25 +61,24 @@ module.exports = {
         })(req, res, next);
     },
 
-    logout : (req, res) => {
-        req.logout((err) => {
+    logout: (req, res, next) => {
+      console.log("Logging out user:", req.user);
+    
+      req.logout((err) => {
         if (err) {
-            console.error("Logout error:", err);
-            return res.status(500).send("An error occurred during logout.");
+          return next(err);
         }
     
-        if (req.session) {
-            req.session.destroy((destroyErr) => {
-            if (destroyErr) {
-                console.error("Error: Failed to destroy the session during logout.", destroyErr);
-            }
-            req.user = null;
-            res.redirect("/");
-            });
-        } else {
-            res.redirect("/");
-        }
+        req.session.destroy((destroyErr) => {
+          if (destroyErr) {
+            console.error("Error destroying session:", destroyErr);
+            return next(destroyErr);
+          }
+    
+          res.clearCookie("connect.sid"); // or whatever your session cookie is named
+          res.redirect("/");
         });
+      });
     },
 
  
