@@ -4,8 +4,20 @@
             <h2>Hi, <%= user.firstName %>!</h2>
             <p>Today we have products from:</p>
             <ul>
+                <li>
+                    <a href="/shop" class="<%= selectedCompany === "All"  ? 'selected-company': '' %>">
+                        All
+                    </a> 
+                </li>
                 <% companyNames.forEach(name => { %>
-                    <li><%= name %></li>
+                    <li>
+                        <a 
+                            href="/shop/<%= name %>"
+                            class="<%= selectedCompany === name  ? 'selected-company': '' %>"
+                            >
+                            <%= name %>
+                        </a>
+                    </li>
                 <% }) %>
             </ul>
         </div>

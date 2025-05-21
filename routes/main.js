@@ -16,6 +16,8 @@ router.get("/product", businessController.getProduct);
 router.post("/createProduct", businessController.createProduct);
 
 router.get("/shop", businessController.getShop);
+router.get("/shop/:name", businessController.getCompanyProducts);
+
 
 
 

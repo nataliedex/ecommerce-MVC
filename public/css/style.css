@@ -32,4 +32,19 @@ ul
     list-style-type: none;
 }
 
+.selected-company {
+  color: green;
+  font-weight: bolder;
+}
+
+a {
+  color: #0056b3;
+  text-decoration: none;
+  border-bottom: 1px dotted #0056b3;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
 

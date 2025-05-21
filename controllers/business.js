@@ -15,6 +15,37 @@ module.exports = {
         }
     },
 
+    getCompanyProducts: async(req, res) => {
+        try{
+            const companyName = req.params.name;
+
+
+            const business = await Business.findOne({  companyName: companyName  });
+
+
+            if(!business){
+                return res.status(404).send("Business not found");
+            }
+
+            const product = await Product.find({ company: business._id }).populate("company", "companyName");
+
+            const allProducts = await Product.find().populate("company", "companyName");
+            const companyNames = [
+                ...new Set(allProducts.map(p => p.company?.companyName).filter(Boolean))
+            ];
+            res.render("shop.ejs", { 
+                user: req.user, 
+                product: product,
+                companyNames: companyNames,
+                selectedCompany: companyName,
+             });
+
+        } catch(err){
+            console.log(err);
+            res.status(500).send("Server Error, Can not get company products");
+        }
+    },
+
     getShop: async(req, res) => {
         try{
         
@@ -26,6 +57,7 @@ module.exports = {
                 user: req.user, 
                 product: product,
                 companyNames: companyNames,
+                selectedCompany: "All",
              });
 
         } catch(err){
