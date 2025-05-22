@@ -1,5 +1,6 @@
 const Product = require("../models/Product");
 const Business = require("../models/Business");
+const Customer = require("../models/Customer");
 
 module.exports = {
 
@@ -9,7 +10,9 @@ module.exports = {
 
             let user = null;
             if(req.user){
-                user = await Business.findById(req.user._id);
+                user = req.user.type === "business" 
+                ? await Business.findById(req.user._id)
+                : await Customer.findById(req.user._id);
             }
 
 
