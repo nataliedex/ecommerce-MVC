@@ -85,10 +85,10 @@ module.exports = {
     getSignUp: async(req, res) => {
       try {
         if(req.user){
-          const redirectPath = "/product";
+          const redirectPath = (req.user.type === "business" ? "/product" : "/shop");
           return res.redirect(redirectPath);
         }
-        res.render("signup.ejs");
+        res.render("signup.ejs", {user: req.user || null});
 
       } catch(err){
         console.log(err);

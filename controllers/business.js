@@ -19,9 +19,7 @@ module.exports = {
         try{
             const companyName = req.params.name;
 
-
             const business = await Business.findOne({  companyName: companyName  });
-
 
             if(!business){
                 return res.status(404).send("Business not found");
@@ -63,6 +61,20 @@ module.exports = {
         } catch(err){
             console.log(err);
             res.status(500).send("Server Error");
+        }
+    },
+
+    getCart: async(req, res) => {
+        try{
+            const user = await Customer.find({  user: req.user.id });
+        
+            res.render("cart.ejs", { 
+                user: user,
+             });
+
+        } catch(err){
+            console.log(err);
+            res.status(500).send("Server Error getting the cart.ejs");
         }
     },
 
