@@ -10,6 +10,8 @@ router.delete("/removeItem/:id", productController.deleteItem);
 router.get("/editItem/:id", productController.getEditItem);
 router.put("/updateItem/:id", productController.updateItem);
 
+router.post("/:id/addToCart", productController.addItemToCart);
+
 
 
 

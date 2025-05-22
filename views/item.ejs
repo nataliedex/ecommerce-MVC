@@ -37,7 +37,10 @@
                         <div class="d-flex justify-content-between align-items-center"> 
                             <div class="btn-group"> 
                                 <!-- update this form to add ability to add to cart -->
-                                <form>
+                                <form
+                                    action="/product/<%= product._id %>/addToCart?_method=POST"
+                                    method="POST"
+                                >
                                     <button type="submit" class="btn btn-sm btn-outline-secondary">Add to Cart</button>
                                 </form>
                             </div>

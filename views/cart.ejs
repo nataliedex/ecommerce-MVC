@@ -3,6 +3,35 @@
         <div class="row w-100 my-md-3 ps-md-3">
             <h2>Hi, <%= user.firstName %>!  Here is your Cart</h2>
         </div>
+
+        <section id="order">
+            <div class="row w-80 my-md-3 ps-md-3">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <!-- create a for loop to get all of the orders from database -->
+                    <% for(let i = 0; i < cartItems.length; i++){ %>
+                        <tr>
+                            <td><%= cartItems[i].product %></td>
+                            <td><%= cartItems[i].companyName %></td>
+                            <td><%= cartItems[i].quantity %></td>
+                            <td>$<%= cartItems[i].price %></td> 
+                          </tr>
+                    <% } %>
+                    </tbody>
+                  </table>
+            </div>
+        </section>
+
+        
+        
             
 
     </main>

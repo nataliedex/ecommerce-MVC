@@ -20,5 +20,8 @@ This is a practice E-commererce application using JavaScript and Node and an MVC
 [x]  delete products on company side
 [x] update add product to be a modal
 [x]  set up model for table
-[]  
+[]  update my cart.ejs file to work with the new Order model
+[]  update my getCart method to work with the new Order model
+[]  update my addItemToCart method to work with the new Order model
+[]  delete the current items in cart to make way for the new model
 

@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const Business = require("../models/Business");
 const Customer = require("../models/Customer");
+const Order = require("../models/Order");
 
 module.exports = {
 
@@ -71,6 +72,36 @@ module.exports = {
             console.log("can not update item", err);
             res.status(500).send("Error updating item");
         }
+      },
+
+      addItemToCart: async(req, res) => {
+        console.log("Adding item to cart");
+        try{
+            
+            const item = await Product.findById(req.params.id);
+            console.log(item);
+            if(!item || item.quantity < 1){
+                return res.status(400).send("Item not available");
+            }
+
+            const quantity = 1;
+
+            await Order.create({
+                company: item.company,
+                customer: req.user._id,
+                product: item.product,
+                quantity: quantity,
+                price: item.price * quantity,
+            });
+
+            item.quantity -= quantity;
+            await item.save();
+
+        } catch(err){
+            console.log("Can not add item to cart", err);
+            res.status(500).send("Error adding item to cart")
+        }
+        res.redirect("/shop");
       },
     
 

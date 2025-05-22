@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const Business = require("../models/Business");
 const Customer = require("../models/Customer");
+const Order = require("../models/Order");
 
 module.exports = {
 
@@ -67,10 +68,14 @@ module.exports = {
 
     getCart: async(req, res) => {
         try{
-            const user = await Customer.find({  user: req.user.id });
+            const user = await Customer.findById(req.user.id);
+            const cartItems = await Order.find({ customer: req.user.id })
+                .populate("product")
+                .populate("company");
         
             res.render("cart.ejs", { 
                 user: user,
+                cartItems: cartItems,
              });
 
         } catch(err){
